@@ -7,6 +7,7 @@ class MyHome extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        backgroundColor: AppColors.white,
         appBar: AppBar(
           title: Text('WhatsApp'),
           backgroundColor: AppColors.teal,
@@ -29,9 +30,9 @@ class MyHome extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            FakeChatsPage(),
-            FakeChatsPage(),
-            FakeChatsPage(),
+            ChatsPage(),
+            FakePage(),
+            FakePage(),
           ],
         ),
       ),
@@ -39,166 +40,79 @@ class MyHome extends StatelessWidget {
   }
 }
 
-class FakeChatsPage extends StatelessWidget {
+class ChatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Container(
-          color: Colors.blue,
-          height: 72,
-        ),
-        Container(
-          color: Colors.red,
-          height: 72,
-        ),
-        Container(
-          color: Colors.yellow,
-          height: 72,
-        ),
-        Container(
-          color: Colors.purple,
-          height: 72,
-        ),
-        Container(
-          color: Colors.blue,
-          height: 72,
-        ),
-        Container(
-          color: Colors.red,
-          height: 72,
-        ),
-        Container(
-          color: Colors.yellow,
-          height: 72,
-        ),
-        Container(
-          color: Colors.purple,
-          height: 72,
-        ),
-        Container(
-          color: Colors.blue,
-          height: 72,
-        ),
-        Container(
-          color: Colors.red,
-          height: 72,
-        ),
-        Container(
-          color: Colors.yellow,
-          height: 72,
-        ),
-        Container(
-          color: Colors.purple,
-          height: 72,
-        ),
-      ],
+    return ListView.separated(
+      itemCount: 7,
+      separatorBuilder: (context, index) => Divider(
+        height: 1,
+        indent: 76,
+        endIndent: 12,
+      ),
+      itemBuilder: (context, index) {
+        return ChatTile();
+      },
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class ChatTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('WhatsApp'),
-        ),
-        body: Container(
-          color: AppColors.teal,
-          constraints: BoxConstraints.expand(),
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                title: Text('WhatsApp'),
-                backgroundColor: AppColors.teal,
-                elevation: 0,
-                actions: [
-                  IconButton(icon: Icon(Icons.search), onPressed: () {}),
-                  IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
-                ],
-                floating: true,
+    return Material(
+      color: AppColors.white,
+      child: InkWell(
+        onTap: () {},
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          alignment: Alignment.center,
+          height: 76,
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 27,
+                backgroundImage:
+                    AssetImage('assets/images/avatar-pic-sample.jpg'),
               ),
-              MySliverTabBar(),
-              // MySliverListForTesting(),
-              SliverToBoxAdapter(
-                child: Container(
-                  color: Colors.purple[100],
-                  constraints: BoxConstraints(),
-                  height: 400,
-                  child: TabBarView(
-                    children: [
-                      Container(
-                        color: Colors.blue,
-                        child: Text('queota'),
-                      ),
-                      Container(
-                        color: Colors.red,
-                        child: Column(
-                          children: [
-                            Container(
-                              color: Colors.purple,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.orange,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.grey,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.black,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.purple,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.orange,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.grey,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.black,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.purple,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.orange,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.grey,
-                              height: 72,
-                            ),
-                            Container(
-                              color: Colors.black,
-                              height: 72,
-                            ),
-                          ],
+              SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Osvaldo Neves',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 17),
                         ),
-                      ),
-                      Container(
-                        color: Colors.yellow,
-                        child: Text('queota'),
-                      ),
-                      Container(
-                        color: Colors.orange,
-                        child: Text('queota'),
-                      ),
-                    ],
-                  ),
+                        SizedBox(
+                          width: 48,
+                        ),
+                        Text(
+                          '12:23',
+                          style: TextStyle(fontSize: 13),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.check,
+                          size: 16,
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text("farei isso"),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -209,141 +123,24 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class MySliverTabBar extends StatelessWidget {
+class FakePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: MyCustomSPHD(),
+    return ListView(
+      children: [
+        Container(color: Colors.blue, height: 72),
+        Container(color: Colors.red, height: 72),
+        Container(color: Colors.yellow, height: 72),
+        Container(color: Colors.purple, height: 72),
+        Container(color: Colors.blue, height: 72),
+        Container(color: Colors.red, height: 72),
+        Container(color: Colors.yellow, height: 72),
+        Container(color: Colors.purple, height: 72),
+        Container(color: Colors.blue, height: 72),
+        Container(color: Colors.red, height: 72),
+        Container(color: Colors.yellow, height: 72),
+        Container(color: Colors.purple, height: 72),
+      ],
     );
-  }
-}
-
-class MyCustomSPHD extends SliverPersistentHeaderDelegate {
-  static const double tabBarHeight = 48;
-
-  @override
-  double get maxExtent => tabBarHeight;
-
-  @override
-  double get minExtent => tabBarHeight;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => false;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    var screenWidth = MediaQuery.of(context).size.width;
-
-    const int numOfTabs = 4;
-    const double cameraIconSize = 22;
-    const double totalCameraIconSize = cameraIconSize + 2 * 12;
-
-    double textLabelWidth =
-        (screenWidth - totalCameraIconSize) / (numOfTabs - 1);
-
-    return Container(
-      color: AppColors.teal,
-      child: TabBar(
-        isScrollable: true,
-        labelPadding: EdgeInsets.zero,
-        labelColor: AppColors.white,
-        unselectedLabelColor: AppColors.white50pct,
-        indicatorColor: AppColors.white,
-        tabs: [
-          SizedBox(
-            width: totalCameraIconSize,
-            child: Tab(
-              icon: Icon(
-                Icons.camera_alt,
-                size: cameraIconSize,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: textLabelWidth,
-            child: Tab(text: 'CHATS'),
-          ),
-          SizedBox(
-            width: textLabelWidth,
-            child: Tab(text: 'STATUS'),
-          ),
-          SizedBox(
-            width: textLabelWidth,
-            child: Tab(text: 'CALLS'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MySliverListForTesting extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SliverList(
-        delegate: SliverChildListDelegate.fixed([
-      Container(
-        color: AppColors.white,
-        height: 88,
-        alignment: Alignment.center,
-        child: Text('blabla'),
-      ),
-      Container(
-        color: AppColors.white,
-        height: 88,
-        alignment: Alignment.center,
-        child: Text('blabla'),
-      ),
-      Container(
-        color: AppColors.white,
-        height: 88,
-        alignment: Alignment.center,
-        child: Text('blabla'),
-      ),
-      Container(
-        color: AppColors.white,
-        height: 88,
-        alignment: Alignment.center,
-        child: Text('blabla'),
-      ),
-      Container(
-        color: AppColors.white,
-        height: 88,
-        alignment: Alignment.center,
-        child: Text('blabla'),
-      ),
-      Container(
-        color: AppColors.white,
-        height: 88,
-        alignment: Alignment.center,
-        child: Text('blabla'),
-      ),
-      Container(
-        color: AppColors.white,
-        height: 88,
-        alignment: Alignment.center,
-        child: Text('blabla'),
-      ),
-      Container(
-        color: AppColors.white,
-        height: 88,
-        alignment: Alignment.center,
-        child: Text('blabla'),
-      ),
-      Container(
-        color: AppColors.white,
-        height: 88,
-        alignment: Alignment.center,
-        child: Text('blabla'),
-      ),
-      Container(
-        color: AppColors.white,
-        height: 88,
-        alignment: Alignment.center,
-        child: Text('blabla'),
-      ),
-    ]));
   }
 }
