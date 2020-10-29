@@ -31,8 +31,8 @@ class MyHome extends StatelessWidget {
         body: TabBarView(
           children: [
             ChatsPage(),
-            FakePage(),
-            FakePage(),
+            FakePage('Status'),
+            FakePage('Calls'),
           ],
         ),
       ),
@@ -124,23 +124,14 @@ class ChatTile extends StatelessWidget {
 }
 
 class FakePage extends StatelessWidget {
+  final String name;
+
+  const FakePage(this.name);
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Container(color: Colors.blue, height: 72),
-        Container(color: Colors.red, height: 72),
-        Container(color: Colors.yellow, height: 72),
-        Container(color: Colors.purple, height: 72),
-        Container(color: Colors.blue, height: 72),
-        Container(color: Colors.red, height: 72),
-        Container(color: Colors.yellow, height: 72),
-        Container(color: Colors.purple, height: 72),
-        Container(color: Colors.blue, height: 72),
-        Container(color: Colors.red, height: 72),
-        Container(color: Colors.yellow, height: 72),
-        Container(color: Colors.purple, height: 72),
-      ],
+    return Center(
+      child: Text(name),
     );
   }
 }
