@@ -38,7 +38,7 @@ class MyHome extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            ChatsPage(),
+            ChatListPage(),
             FakePage('Status'),
             FakePage('Calls'),
           ],
@@ -48,7 +48,7 @@ class MyHome extends StatelessWidget {
   }
 }
 
-class ChatsPage extends StatelessWidget {
+class ChatListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const numOfItems = 19 + 1;
