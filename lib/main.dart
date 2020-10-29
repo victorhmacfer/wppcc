@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wppcc/home.dart';
+import 'package:wppcc/screens/home.dart';
 
 void main() async {
   runApp(MyApp());
