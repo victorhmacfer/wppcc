@@ -8,6 +8,14 @@ class MyHome extends StatelessWidget {
       length: 3,
       child: Scaffold(
         backgroundColor: AppColors.white,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: AppColors.brightGreen,
+          child: Icon(
+            Icons.message,
+            size: 22,
+          ),
+        ),
         appBar: AppBar(
           title: Text('WhatsApp'),
           backgroundColor: AppColors.teal,
@@ -43,16 +51,44 @@ class MyHome extends StatelessWidget {
 class ChatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    const numOfItems = 19 + 1;
+
     return ListView.separated(
-      itemCount: 7,
-      separatorBuilder: (context, index) => Divider(
-        height: 1,
-        indent: 76,
-        endIndent: 12,
-      ),
-      itemBuilder: (context, index) {
-        return ChatTile();
+      padding: EdgeInsets.only(bottom: 76),
+      itemCount: numOfItems,
+      separatorBuilder: (context, index) {
+        if (index < numOfItems - 2) {
+          return Divider(
+            height: 1,
+            indent: 76,
+            endIndent: 12,
+          );
+        }
+        return Container();
       },
+      itemBuilder: (context, index) {
+        return (index != numOfItems - 1) ? ChatTile() : ArchivedLinkTile();
+      },
+    );
+  }
+}
+
+class ArchivedLinkTile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppColors.white,
+      child: InkWell(
+        onTap: () {},
+        child: Container(
+          height: 48,
+          alignment: Alignment.center,
+          child: Text(
+            'Archived(45)',
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -88,28 +124,27 @@ class ChatTile extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 17),
                         ),
-                        SizedBox(
-                          width: 48,
-                        ),
-                        Text(
-                          '12:23',
-                          style: TextStyle(fontSize: 13),
-                        ),
+                        SizedBox(width: 48),
+                        Text('12:23', style: TextStyle(fontSize: 13)),
                       ],
                     ),
-                    SizedBox(
-                      height: 4,
-                    ),
+                    SizedBox(height: 4),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(
-                          Icons.check,
-                          size: 16,
+                        Row(
+                          children: [
+                            Icon(Icons.done_all, size: 16),
+                            SizedBox(width: 4),
+                            Text("farei isso"),
+                          ],
                         ),
-                        SizedBox(
-                          width: 4,
+                        Row(
+                          children: [
+                            Icon(Icons.volume_mute),
+                            Icon(Icons.pin_drop),
+                          ],
                         ),
-                        Text("farei isso"),
                       ],
                     ),
                   ],
