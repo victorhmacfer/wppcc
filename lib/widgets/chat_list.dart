@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wppcc/colors.dart';
+import 'package:wppcc/screens/chat_screen.dart';
 
 class ChatListPage extends StatelessWidget {
   @override
@@ -52,7 +53,10 @@ class ChatTile extends StatelessWidget {
     return Material(
       color: AppColors.white,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ChatScreen()));
+        },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
           alignment: Alignment.center,
