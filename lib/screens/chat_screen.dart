@@ -3,9 +3,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:wppcc/colors.dart';
 
+const double bottomSheetDefaultHeight = 56;
+
 class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    const double spacerHeight = 8;
+
     return Scaffold(
       appBar: AppBar(
         title: _Title(),
@@ -23,27 +27,42 @@ class ChatScreen extends StatelessWidget {
         color: AppColors.lightBrown,
         constraints: BoxConstraints.expand(),
         child: ListView(
+          padding: EdgeInsets.only(bottom: bottomSheetDefaultHeight),
           children: [
             MessageTile(Colors.yellow[200], false),
             MessageTile(Colors.blue[200], false),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.orange[200]),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.indigo[200], false),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.red[200]),
             MessageTile(Colors.brown[200]),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.pink[200], false),
             MessageTile(Colors.yellow[200], false),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.blue[200]),
             MessageTile(Colors.orange[200]),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.indigo[200], false),
             MessageTile(Colors.red[200], false),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.brown[200]),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.pink[200], false),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.yellow[200]),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.blue[200], false),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.orange[200]),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.indigo[200], false),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.red[200]),
             MessageTile(Colors.brown[200]),
+            SizedBox(height: spacerHeight),
             MessageTile(Colors.pink[200], false),
           ],
         ),
@@ -65,19 +84,29 @@ class MessageTile extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 2, horizontal: 16),
       alignment: sent ? Alignment.centerRight : Alignment.centerLeft,
       color: color,
-      child: MessageBubble(),
+      child: MessageBubble(sent),
     );
   }
 }
 
 class MessageBubble extends StatelessWidget {
+  final bool sent;
+
+  MessageBubble(this.sent);
+
   @override
   Widget build(BuildContext context) {
-
     return Container(
       constraints: BoxConstraints(maxWidth: 336),
-      color: Colors.green[100],
-      child: Text(lorem()),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+          color: (sent) ? AppColors.bubbleGreen : AppColors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.2), offset: Offset(0, 0.5)),
+          ]),
+      child: Text(lorem(), style: TextStyle(fontSize: 16)),
     );
   }
 }
@@ -87,7 +116,8 @@ class _MyBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.lightBrown,
-      constraints: BoxConstraints(minHeight: 56, maxHeight: 144),
+      constraints:
+          BoxConstraints(minHeight: bottomSheetDefaultHeight, maxHeight: 144),
       padding: EdgeInsets.fromLTRB(6, 4, 4, 4),
       child: IntrinsicHeight(
         child: Row(
@@ -104,7 +134,6 @@ class _MyBottomSheet extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                      // color: Colors.red,
                       padding: EdgeInsets.all(8),
                       child: Icon(Icons.sentiment_very_satisfied, size: 26),
                     ),
@@ -117,7 +146,6 @@ class _MyBottomSheet extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      // color: Colors.red,
                       padding: EdgeInsets.all(8),
                       child: Icon(Icons.camera_alt, size: 25),
                     ),
@@ -211,8 +239,8 @@ String lorem() {
   var randTen = Random().nextInt(10);
   var max = (randTen < 8) ? 12 : 50;
 
-  var rand = Random().nextInt(max);
-  
+  var rand = Random().nextInt(max) + 1;
+
   var sub = words.sublist(0, rand);
   return sub.join(" ");
 }

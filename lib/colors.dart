@@ -7,5 +7,6 @@ class AppColors {
   static const white = Color.fromRGBO(255, 255, 255, 1);
   static const white50pct = Color.fromRGBO(255, 255, 255, 0.5);
   static const brightGreen = Color.fromRGBO(0, 204, 63, 1);
+  static const bubbleGreen = Color.fromRGBO(226, 255, 199, 1);
   static const lightBrown = Color.fromRGBO(239, 230, 222, 1);
 }
