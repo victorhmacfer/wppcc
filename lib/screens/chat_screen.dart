@@ -27,7 +27,7 @@ class ChatScreen extends StatelessWidget {
         color: AppColors.lightBrown,
         constraints: BoxConstraints.expand(),
         child: ListView(
-          padding: EdgeInsets.only(bottom: bottomSheetDefaultHeight),
+          padding: EdgeInsets.only(bottom: bottomSheetDefaultHeight + 4),
           children: [
             MessageTile(Colors.yellow[200], false),
             MessageTile(Colors.blue[200], false),
@@ -67,7 +67,7 @@ class ChatScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomSheet: _MyBottomSheet(),
+      bottomSheet: _BottomSheet(),
     );
   }
 }
@@ -83,7 +83,7 @@ class MessageTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 2, horizontal: 16),
       alignment: sent ? Alignment.centerRight : Alignment.centerLeft,
-      color: color,
+      color: AppColors.lightBrown,
       child: MessageBubble(sent),
     );
   }
@@ -98,7 +98,7 @@ class MessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(maxWidth: 336),
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
           color: (sent) ? AppColors.bubbleGreen : AppColors.white,
           borderRadius: BorderRadius.circular(8),
@@ -106,12 +106,42 @@ class MessageBubble extends StatelessWidget {
             BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.2), offset: Offset(0, 0.5)),
           ]),
-      child: Text(lorem(), style: TextStyle(fontSize: 16)),
+      child: Container(
+        // color: Colors.red,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Flexible(
+              child: Container(
+                // color: Colors.yellow,
+                padding: EdgeInsets.only(bottom: 4),
+                child: Text(lorem(), style: TextStyle(fontSize: 16)),
+              ),
+            ),
+            Container(
+              // color: Colors.blue,
+              padding: EdgeInsets.only(left: 8),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '15:23',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  SizedBox(width: 4),
+                  Icon(Icons.done_all, size: 18),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class _MyBottomSheet extends StatelessWidget {
+class _BottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -133,21 +163,30 @@ class _MyBottomSheet extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      child: Icon(Icons.sentiment_very_satisfied, size: 26),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        showCursor: true,
-                        maxLines: null,
-                        decoration: InputDecoration.collapsed(
-                            hintText: 'Type a message'),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(Icons.sentiment_very_satisfied, size: 26),
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      child: Icon(Icons.camera_alt, size: 25),
+                    Expanded(
+                      child: Container(
+                        child: TextField(
+                          style: TextStyle(fontSize: 18),
+                          showCursor: true,
+                          maxLines: null,
+                          decoration: InputDecoration.collapsed(
+                              hintText: 'Type a message'),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(Icons.camera_alt, size: 25),
+                      ),
                     ),
                     SizedBox(width: 4),
                   ],
