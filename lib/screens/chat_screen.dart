@@ -27,7 +27,7 @@ class ChatScreen extends StatelessWidget {
         color: AppColors.lightBrown,
         constraints: BoxConstraints.expand(),
         child: ListView(
-          padding: EdgeInsets.only(bottom: bottomSheetDefaultHeight + 4),
+          padding: EdgeInsets.only(bottom: bottomSheetDefaultHeight + 4, top: 4),
           children: [
             MessageTile(Colors.yellow[200], false),
             MessageTile(Colors.blue[200], false),
