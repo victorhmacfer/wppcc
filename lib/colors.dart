@@ -12,4 +12,6 @@ class AppColors {
   static const muteGrey = Color.fromRGBO(168, 173, 175, 1);
   static const pinGrey = Color.fromRGBO(184, 188, 189, 1);
   static const chatTileMessageGrey = Color.fromRGBO(117, 117, 117, 1);
+  static const chatFieldIconGrey = Color.fromRGBO(141, 141, 141, 1);
+  static const coloredBubbleGrey = Color.fromRGBO(72, 72, 72, 0.55);
 }

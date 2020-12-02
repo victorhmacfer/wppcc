@@ -27,7 +27,8 @@ class ChatScreen extends StatelessWidget {
         color: AppColors.lightBrown,
         constraints: BoxConstraints.expand(),
         child: ListView(
-          padding: EdgeInsets.only(bottom: bottomSheetDefaultHeight + 4, top: 4),
+          padding:
+              EdgeInsets.only(bottom: bottomSheetDefaultHeight + 4, top: 4),
           children: [
             MessageTile(Colors.yellow[200], false),
             MessageTile(Colors.blue[200], false),
@@ -107,30 +108,32 @@ class MessageBubble extends StatelessWidget {
                 color: Color.fromRGBO(0, 0, 0, 0.2), offset: Offset(0, 0.5)),
           ]),
       child: Container(
-        // color: Colors.red,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Flexible(
               child: Container(
-                // color: Colors.yellow,
                 padding: EdgeInsets.only(bottom: 4),
                 child: Text(lorem(), style: TextStyle(fontSize: 16)),
               ),
             ),
             Container(
-              // color: Colors.blue,
               padding: EdgeInsets.only(left: 8),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     '15:23',
-                    style: TextStyle(fontSize: 12),
+                    style: TextStyle(
+                        fontSize: 12, color: AppColors.coloredBubbleGrey),
                   ),
-                  SizedBox(width: 4),
-                  Icon(Icons.done_all, size: 18),
+                  (sent)
+                      ? Container(
+                          padding: EdgeInsets.only(left: 4),
+                          child: Icon(Icons.done_all,
+                              size: 18, color: AppColors.coloredBubbleGrey))
+                      : Container(),
                 ],
               ),
             ),
@@ -166,8 +169,12 @@ class _BottomSheet extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
-                        padding: EdgeInsets.all(8),
-                        child: Icon(Icons.sentiment_very_satisfied, size: 26),
+                        padding: EdgeInsets.fromLTRB(8, 0, 8, 10),
+                        child: Icon(
+                          Icons.sentiment_very_satisfied,
+                          size: 26,
+                          color: AppColors.chatFieldIconGrey,
+                        ),
                       ),
                     ),
                     Expanded(
@@ -184,8 +191,12 @@ class _BottomSheet extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
-                        padding: EdgeInsets.all(8),
-                        child: Icon(Icons.camera_alt, size: 25),
+                        padding: EdgeInsets.fromLTRB(8, 0, 8, 10),
+                        child: Icon(
+                          Icons.camera_alt,
+                          size: 25,
+                          color: AppColors.chatFieldIconGrey,
+                        ),
                       ),
                     ),
                     SizedBox(width: 4),
