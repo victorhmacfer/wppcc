@@ -39,7 +39,10 @@ class ArchivedLinkTile extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             'Archived(45)',
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
+            style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 12,
+                color: AppColors.chatTileMessageGrey),
           ),
         ),
       ),
@@ -82,24 +85,37 @@ class ChatTile extends StatelessWidget {
                               fontWeight: FontWeight.w600, fontSize: 17),
                         ),
                         SizedBox(width: 48),
-                        Text('12:23', style: TextStyle(fontSize: 13)),
+                        Text(
+                          '12:23',
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: AppColors.chatTileMessageGrey),
+                        ),
                       ],
                     ),
-                    SizedBox(height: 4),
+                    SizedBox(height: 2),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.done_all, size: 16),
+                            Icon(
+                              Icons.done_all,
+                              size: 16,
+                              color: AppColors.muteGrey,
+                            ),
                             SizedBox(width: 4),
-                            Text("farei isso"),
+                            Text(
+                              "farei isso",
+                              style: TextStyle(
+                                  color: AppColors.chatTileMessageGrey),
+                            ),
                           ],
                         ),
                         Row(
                           children: [
-                            Icon(Icons.volume_mute),
-                            Icon(Icons.pin_drop),
+                            Icon(Icons.volume_mute, color: AppColors.muteGrey),
+                            Icon(Icons.pin_drop, color: AppColors.pinGrey),
                           ],
                         ),
                       ],

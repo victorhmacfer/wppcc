@@ -9,4 +9,7 @@ class AppColors {
   static const brightGreen = Color.fromRGBO(0, 204, 63, 1);
   static const bubbleGreen = Color.fromRGBO(226, 255, 199, 1);
   static const lightBrown = Color.fromRGBO(239, 230, 222, 1);
+  static const muteGrey = Color.fromRGBO(168, 173, 175, 1);
+  static const pinGrey = Color.fromRGBO(184, 188, 189, 1);
+  static const chatTileMessageGrey = Color.fromRGBO(117, 117, 117, 1);
 }
