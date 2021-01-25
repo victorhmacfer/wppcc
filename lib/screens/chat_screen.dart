@@ -30,41 +30,40 @@ class ChatScreen extends StatelessWidget {
           padding:
               EdgeInsets.only(bottom: bottomSheetDefaultHeight + 4, top: 4),
           children: [
-            MessageTile(Colors.yellow[200], false),
-            MessageTile(Colors.blue[200], false),
+            MessageTile(sent: false),
+            MessageTile(sent: false),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.orange[200]),
+            MessageTile(),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.indigo[200], false),
+            MessageTile(sent: false),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.red[200]),
-            MessageTile(Colors.brown[200]),
+            MessageTile(),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.pink[200], false),
-            MessageTile(Colors.yellow[200], false),
+            MessageTile(sent: false),
+            MessageTile(sent: false),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.blue[200]),
-            MessageTile(Colors.orange[200]),
+            MessageTile(),
+            MessageTile(),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.indigo[200], false),
-            MessageTile(Colors.red[200], false),
+            MessageTile(sent: false),
+            MessageTile(sent: false),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.brown[200]),
+            MessageTile(),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.pink[200], false),
+            MessageTile(sent: false),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.yellow[200]),
+            MessageTile(),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.blue[200], false),
+            MessageTile(sent: false),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.orange[200]),
+            MessageTile(),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.indigo[200], false),
+            MessageTile(sent: false),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.red[200]),
-            MessageTile(Colors.brown[200]),
+            MessageTile(),
+            MessageTile(),
             SizedBox(height: spacerHeight),
-            MessageTile(Colors.pink[200], false),
+            MessageTile(sent: false),
           ],
         ),
       ),
@@ -74,10 +73,9 @@ class ChatScreen extends StatelessWidget {
 }
 
 class MessageTile extends StatelessWidget {
-  final Color color;
   final bool sent;
 
-  MessageTile(this.color, [this.sent = true]);
+  MessageTile({this.sent = true});
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +142,22 @@ class MessageBubble extends StatelessWidget {
   }
 }
 
-class _BottomSheet extends StatelessWidget {
+class _BottomSheet extends StatefulWidget {
+  @override
+  __BottomSheetState createState() => __BottomSheetState();
+}
+
+class __BottomSheetState extends State<_BottomSheet> {
+  final messageTextController = TextEditingController();
+
+  Icon sendButtonIcon;
+
+  @override
+  void initState() {
+    super.initState();
+    sendButtonIcon = Icon(Icons.mic, color: AppColors.white, size: 26);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -180,6 +193,18 @@ class _BottomSheet extends StatelessWidget {
                     Expanded(
                       child: Container(
                         child: TextField(
+                          controller: messageTextController,
+                          onChanged: (text) {
+                            if (text.isEmpty) {
+                              setState(() {
+                                sendButtonIcon = Icon(Icons.mic, color: AppColors.white, size: 26);
+                              });
+                            } else if (text.length == 1) {
+                              setState(() {
+                                sendButtonIcon = Icon(Icons.send, color: AppColors.white, size: 22);
+                              });
+                            }
+                          },
                           style: TextStyle(fontSize: 18),
                           showCursor: true,
                           maxLines: null,
@@ -208,11 +233,12 @@ class _BottomSheet extends StatelessWidget {
             Container(
               height: 48,
               width: 48,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: AppColors.lightTeal,
                 borderRadius: BorderRadius.circular(24),
               ),
-              child: Icon(Icons.mic, color: AppColors.white, size: 26),
+              child: sendButtonIcon,
             ),
           ],
         ),
